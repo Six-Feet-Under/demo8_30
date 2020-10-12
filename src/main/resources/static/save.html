@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="bt/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bt/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="bt/js/jquery.js"></script>
+    <script type="text/javascript" src="bt/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form>
+    <div class="container">
+        <div class="form-group">
+            <label for="exampleInputEmail1">UserName</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">RePassword</label>
+            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+        </div>
+        <input id="sub" class="btn-success form-control" type="button" value="注册">
+    </div>
+</form>
+</body>
+</html>
+
+<script type="text/javascript">
+    $("#sub").click(function () {
+        var userName = $("#exampleInputEmail1").val();
+        var passWord = $("#exampleInputPassword1").val();
+        var rePassWord = $("#exampleInputPassword2").val();
+
+        if (userName.length == 0) {
+            alert("用户名为空");
+            return;
+        }
+
+        if (passWord.length == 0) {
+            alert("密码为空");
+            return;
+        }
+
+        if (rePassWord != passWord) {
+            alert("密码不一致");
+            return;
+        }
+
+        var user = {
+            "username": userName,
+            "password": passWord
+        }
+
+        var userJson = JSON.stringify(user)
+
+        $.post({
+            url: "user/save",
+            data: userJson,
+            contentType:'application/json',
+            succes: function (data) {
+            }
+        });
+
+    })
+</script>
